@@ -1,0 +1,22 @@
+<launch>
+
+  <!-- Bringup physical Turtlebot-->
+  <include file="$(find turtlebot3_bringup)/launch/turtlebot3_robot.launch"/>
+
+  <!-- Include the .launch system used also by simulation -->
+  <include file="$(find dogfinder_robot)/launch/find_dog.launch">
+    <arg name="use_sim_time" value="false"/>
+  </include>
+
+  <!-- Decompress the received images from the camera -->
+  <node pkg="image_transport" type="republish" name="camera_decompress" args="compressed in:=/raspicam_node/image raw out:=/camera/rgb/image_raw"/>
+
+  <node pkg="raspicam_node" type="raspicam_node" name="raspicam_node">
+    <param name="camera_info_url" value="package://turtlebot3_bringup/camera_info/turtlebot3_rpicamera.yaml"/>
+    <param name="width" value="640"/>
+    <param name="height" value="480"/>
+    <param name="framerate" value="15"/>
+    <param name="camera_frame_id" value="camera"/>
+  </node>
+
+</launch>
