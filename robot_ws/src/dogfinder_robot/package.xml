@@ -21,8 +21,6 @@
   <depend>cloudwatch_metrics_common</depend>
   <depend>aws_common</depend>
   <depend>aws_ros1_common</depend>
-  <depend>aws_cpp_sdk_logs</depend>
-  <depend>aws_cpp_sdk_monitoring</depend>
   <depend>ros_monitoring_msgs</depend>
   <depend>health_metric_collector</depend>
 
@@ -31,8 +29,6 @@
   <depend>kinesis_video_msgs</depend>
   <depend>h264_encoder_core</depend>
   <depend>h264_video_encoder</depend>
-  <depend>amazon_kinesis_video_streams_producer_sdk_cpp</depend>
-  <depend>aws_cpp_sdk_kinesis</depend>
 
   <!-- Target robot specifics - TurtleBot3 here -->
   <depend>turtlebot3</depend>
