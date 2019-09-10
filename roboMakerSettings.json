@@ -1,0 +1,90 @@
+{
+  "runConfigurations": [{
+      "id": "DogFinder_Cfg01",
+      "name": "DogFinder Robot",
+      "type": "colcon build",
+      "cfg": {
+        "workingDir": "./DogFinder/robot_ws",
+        "cmdArgs": ""
+      }
+    }, {
+      "id": "DogFinder_Cfg02",
+      "name": "DogFinder Robot",
+      "type": "colcon bundle",
+      "cfg": {
+        "workingDir": "./DogFinder/robot_ws",
+        "cmdArgs": ""
+      }
+    }, {
+      "id": "DogFinder_Cfg03",
+      "name": "DogFinder Simulation",
+      "type": "colcon build",
+      "cfg": {
+        "workingDir": "./DogFinder/simulation_ws",
+        "cmdArgs": ""
+      }
+    }, {
+      "id": "DogFinder_Cfg04",
+      "name": "DogFinder Simulation",
+      "type": "colcon bundle",
+      "cfg": {
+        "workingDir": "./DogFinder/simulation_ws",
+        "cmdArgs": ""
+      }
+    }, {
+      "id": "DogFinder_SimulationJob1",
+      "name": "DogFinder",
+      "type": "simulation",
+      "cfg": {
+        "robotApp": {
+          "name": "RoboMakerDogFinderRobot",
+          "s3Bucket": "<bucket name for your robot bundle>",
+          "sourceBundleFile": "./DogFinder/robot_ws/bundle/output.tar",
+          "architecture": "X86_64",
+          "robotSoftwareSuite": {
+            "version": "<capitalised name of ROS distribution, e.g. Kinetic>",
+            "name": "ROS"
+          },
+          "launchConfig": {
+            "packageName": "dogfinder_robot",
+            "launchFile": "find_dog.launch"
+          }
+        },
+        "simulationApp": {
+          "name": "RoboMakerDogFinderSimulation",
+          "s3Bucket": "<bucket name for your simulation bundle>",
+          "sourceBundleFile": "./DogFinder/simulation_ws/bundle/output.tar",
+          "architecture": "X86_64",
+          "launchConfig": {
+            "packageName": "dogfinder_simulation",
+            "launchFile": "hexagon.launch"
+          },
+          "robotSoftwareSuite": {
+            "version": "<capitalised name of ROS distribution, e.g. Kinetic>",
+            "name": "ROS"
+          },
+          "simulationSoftwareSuite": {
+            "name": "Gazebo",
+            "version": "<gazebo version number, e.g. 7>"
+          },
+          "renderingEngine": {
+            "name": "OGRE",
+            "version": "1.x"
+          }
+        },
+        "simulation": {
+          "outputLocation": "<bucket name for your job outputs>",
+          "failureBehavior": "Fail",
+          "maxJobDurationInSeconds": 28800,
+          "iamRole": "<your RoboMaker simulation job role ARN>"
+        }
+      }
+    },
+    {
+      "id": "DogFinder_wf1",
+      "type": "workflow",
+      "name": "DogFinder - Build and Bundle All",
+      "runCfgIds": ["DogFinder_Cfg01", "DogFinder_Cfg02", "DogFinder_Cfg03", "DogFinder_Cfg04"]
+    }
+  ]
+}
