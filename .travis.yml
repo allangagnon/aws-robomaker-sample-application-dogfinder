@@ -9,9 +9,12 @@ notifications:
     - ros-contributions@amazon.com
 env:
   matrix:
-  - ROS_DISTRO=kinetic ROS_VERSION=1 GAZEBO_VERSION=7
-  - ROS_DISTRO=kinetic ROS_VERSION=1 GAZEBO_VERSION=9
-  - ROS_DISTRO=melodic ROS_VERSION=1 GAZEBO_VERSION=9
+  - ROS_DISTRO=kinetic ROS_VERSION=1 GAZEBO_VERSION=7 WORKSPACES="robot_ws"
+  - ROS_DISTRO=kinetic ROS_VERSION=1 GAZEBO_VERSION=9 WORKSPACES="robot_ws"
+  - ROS_DISTRO=melodic ROS_VERSION=1 GAZEBO_VERSION=9 WORKSPACES="robot_ws"
+  - ROS_DISTRO=kinetic ROS_VERSION=1 GAZEBO_VERSION=7 WORKSPACES="simulation_ws"
+  - ROS_DISTRO=kinetic ROS_VERSION=1 GAZEBO_VERSION=9 WORKSPACES="simulation_ws"
+  - ROS_DISTRO=melodic ROS_VERSION=1 GAZEBO_VERSION=9 WORKSPACES="simulation_ws"
   global:
   - SA_NAME=dog-finder
   - SA_PACKAGE_NAME=dogfinder_robot
